@@ -1,16 +1,19 @@
 import tkinter as tk
+from settings import WIDTH, HEIGHT
 
-# Setup Settings - could be in another file ?
-lives = 3
-WIDTH = 600
-HEIGHT = 480
+class Game(tk.Frame):
+    def __init__(self, master):
+        super(Game, self).__init__(master)
+        self.lives = 3
+        self.width = WIDTH
+        self.height = HEIGHT
+        self.canvas = tk.Canvas(self, bg="#AAAAFF", width = self.width, height = self.height)
 
-# Setup Tk
-main = tk.Tk()
-frame = tk.Frame(main)
-canvas = tk.Canvas(frame, width = WIDTH, height = HEIGHT, bg = '#AAAAFF')
-frame.pack()
-canvas.pack()
+        self.canvas.pack()
+        self.pack()
 
-main.title('Main Window')
-main.mainloop()
+if __name__ == '__main__':
+    main = tk.Tk()
+    main.title('Breakout_Py')
+    game = Game(main)
+    game.mainloop()
