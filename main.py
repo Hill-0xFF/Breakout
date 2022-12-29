@@ -32,7 +32,7 @@ class Game(tk.Frame):
     def setup_game(self):
         self.add_ball()
         self.update_lives_text()
-        self.text = self.draw_text(300, 200, 'Press <SPACE> to start')
+        self.text = self.draw_text(300, 200, 'Press <SPACE> to start\n by Hill-0x77')
         self.canvas.bind('<space>', lambda _: self.start_game())
 
     def add_ball(self):
@@ -123,7 +123,7 @@ class Brick(GameObject):
 
 if __name__ == '__main__':
     main = tk.Tk()
-    main.title('Breakout_Py')
+    main.title('Breakout_Py | HILL-0x77')
     game = Game(main)
 
     # item = game.canvas.create_rectangle(10, 10, 100, 80, fill='green') # paddle
