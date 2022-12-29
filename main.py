@@ -34,6 +34,27 @@ class Ball(GameObject):
         item = canvas.create_oval(pos_x - self.radius, pos_y - self.radius, pos_x + self.radius, pos_y + self.radius, fill = 'white' )
         super(Ball, self).__init__(canvas, item)
 
+class Paddle(GameObject):
+    def __init__(self, canvas, pos_x, pos_y):
+        self.width = 80
+        self.height = 10
+        self.ball = None
+        item = canvas.create_rectangle(pos_x - self.width / 2, pos_y - self.width / 2, pos_x + self.width / 2, pos_y + self.width / 2, fill = 'blue')
+        super(Paddle, self).__init__(canvas, item)
+
+    def setball(self, ball):
+        self.ball = ball
+
+    def move(self, offset):
+        coords = self.get_position()
+        width = self.canvas.winfo_width()
+
+        if coords[0] + offset >= 0 and coords[2] + offset <= width:
+            super(Paddle, self).move(offset)
+
+            if self.ball is not None:
+                self.ball.move(offset, 0)
+
 if __name__ == '__main__':
     main = tk.Tk()
     main.title('Breakout_Py')
