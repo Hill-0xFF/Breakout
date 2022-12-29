@@ -39,7 +39,7 @@ class Paddle(GameObject):
         self.width = 80
         self.height = 10
         self.ball = None
-        item = canvas.create_rectangle(pos_x - self.width / 2, pos_y - self.width / 2, pos_x + self.width / 2, pos_y + self.width / 2, fill = 'blue')
+        item = canvas.create_rectangle(pos_x - self.width / 2, pos_y - self.height / 2, pos_x + self.width / 2, pos_y + self.height / 2, fill = 'blue')
         super(Paddle, self).__init__(canvas, item)
 
     def setball(self, ball):
@@ -54,6 +54,23 @@ class Paddle(GameObject):
 
             if self.ball is not None:
                 self.ball.move(offset, 0)
+
+class Brick(GameObject):
+    COLORS = {1: '#999999', 2: '#555555', 3: '#222222'}
+    def __init__(self, canvas, pos_x, pos_y, hits):
+        self.width = 75
+        self.height = 20
+        self.hits = hits
+        color = Brick.COLORS[hits]
+        item = canvas.create_rectangle(pos_x - self.width / 2, pos_y - self.height / 2, pos_x + self.width / 2, pos_y + self.height / 2, fill = color, tags = 'bricks')
+        super(Brick, self).__init__(canvas, item)
+
+    def got_hit(self):
+        self.hits -= 1
+        if self.hits == 0:
+            self.delete()
+        else:
+            self.canvas.itemconfig(self.item, fill = Brick.COLORS[self.hits])
 
 if __name__ == '__main__':
     main = tk.Tk()
