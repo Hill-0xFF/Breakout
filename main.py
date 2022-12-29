@@ -12,6 +12,55 @@ class Game(tk.Frame):
         self.canvas.pack()
         self.pack()
 
+        # Implementing the objects on canvas frame
+        self.items = {}
+        self.ball = None
+        self.paddle = Paddle(self.canvas, self.width / 2, 326)
+        self.items[self.paddle.item] = self.paddle
+
+        for z in range(5, self.width - 5, 75):
+            self.add_brick(z + 37.5, 50, 2)
+            self.add_brick(z + 37.5, 70, 1)
+            self.add_brick(z + 37.5, 90, 1)
+
+        self.hud = None
+        self.setup_game()
+        self.canvas.focus_set()
+        self.canvas.bind('<Left>', lambda _: self.paddle.move(-10))
+        self.canvas.bind('<Right>', lambda _: self.paddle.move(10))
+
+    def setup_game(self):
+        self.add_ball()
+        self.update_lives_text()
+        self.text = self.draw_text(300, 200, 'Press <SPACE> to start')
+        self.canvas.bind('<space>', lambda _: self.start_game())
+
+    def add_ball(self):
+        if self.ball is not None:
+            self.ball.delete()
+        paddle_coords = self.paddle.get_position()
+        pos_x = (paddle_coords[0] + paddle_coords[2] * 0.1)
+        self.ball = Ball(self.canvas, pos_x, 310)
+        self.paddle.setball(self.ball)
+
+    def add_brick(self, pos_x, pos_y, hits):
+        brick = Brick(self.canvas, pos_x, pos_y, hits)
+        self.items[brick.item] = brick
+
+    def draw_text(self, pos_x, pos_y, text, size = '40'):
+        font = ('Helvetica', size)
+        return self.canvas.create_text(pos_x, pos_y, text = text, font = font)
+
+    def update_lives_text(self):
+        text = 'Lives : %s' % self.lives
+        if self.hud is None:
+            self.hud = self.draw_text(50, 20, text, 15)
+        else:
+            self.canvas.itemconfig(self.hud, text = text)
+
+    def start_game(self):
+        pass
+
 class GameObject(object):
     def __init__(self, canvas, item):
         self.canvas = canvas
@@ -77,7 +126,7 @@ if __name__ == '__main__':
     main.title('Breakout_Py')
     game = Game(main)
 
-    item = game.canvas.create_rectangle(10, 10, 100, 80, fill='green') # paddle
-    game_object = GameObject(game.canvas, item)
+    # item = game.canvas.create_rectangle(10, 10, 100, 80, fill='green') # paddle
+    # game_object = GameObject(game.canvas, item)
     
     game.mainloop()
