@@ -12,6 +12,20 @@ class Game(tk.Frame):
         self.canvas.pack()
         self.pack()
 
+class GameObject(object):
+    def __init__(self, canvas, item):
+        self.canvas = canvas
+        self.item = item
+    
+    def get_position(self):
+        return self.canvas.coords(self.item)
+    
+    def move(self, pos_x, pos_y):
+        self.canvas.move(self.item, pos_x, pos_y)
+
+    def delete(self):
+        self.canvas.delete(self.item)
+
 if __name__ == '__main__':
     main = tk.Tk()
     main.title('Breakout_Py')
