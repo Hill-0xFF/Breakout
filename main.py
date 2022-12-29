@@ -99,7 +99,7 @@ class Paddle(GameObject):
         width = self.canvas.winfo_width()
 
         if coords[0] + offset >= 0 and coords[2] + offset <= width:
-            super(Paddle, self).move(offset)
+            super(Paddle, self).move(offset, 0)
 
             if self.ball is not None:
                 self.ball.move(offset, 0)
