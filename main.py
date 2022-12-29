@@ -30,4 +30,8 @@ if __name__ == '__main__':
     main = tk.Tk()
     main.title('Breakout_Py')
     game = Game(main)
+
+    item = game.canvas.create_rectangle(10, 10, 100, 80, fill='green') # paddle
+    game_object = GameObject(game.canvas, item)
+
     game.mainloop()
