@@ -4,3 +4,4 @@
 </div>
 <div id="content">
   <p><h3><span style="color: green">:diamond_shape_with_a_dot_inside: Simple Breakout game, using python, as I'm eager to put a lot of ideas as I'm learning game development with Python.</span></h3></p>
+<p>PS: this gif is not the final result, as I always use my own gifs, when finished, it will change!</p>
