@@ -32,7 +32,7 @@ class Game(tk.Frame):
     def setup_game(self):
         self.add_ball()
         self.update_lives_text()
-        self.text = self.draw_text(300, 200, 'Press <SPACE> to start\n by Hill-0x77')
+        self.text = self.draw_text(300, 200, 'Press <SPACE> to start')
         self.canvas.bind('<space>', lambda _: self.start_game())
 
     def add_ball(self):
